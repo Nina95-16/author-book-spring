@@ -14,6 +14,7 @@
         <td>email</td>
         <td>gender</td>
         <td>bio</td>
+        <th>image</th>
         <td>action</td>
     </tr>
     </thead>
@@ -25,12 +26,12 @@
           <td th:text="${author.email}"></td>
           <td th:text="${author.gender.name()}"></td>
           <td th:text="${author.bio}"></td>
+          <td th:text="${author.imageUrl}"></td>
           <td>
               <a th:href="@{/author/save/(id=${author.id})}">Edit</a> | <a th:href="@{/author/delete/(id=${author.id})}">Delete</a>
           </td>
       </tr>
     </tbody>
 </table>
-
 </body>
 </html>

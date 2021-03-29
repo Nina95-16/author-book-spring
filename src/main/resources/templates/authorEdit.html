@@ -6,16 +6,17 @@
 </head>
 <body>
 EDIT AUTHOR:
-<form action="/author/save" method="post" >
+<form action="/author/save" method="post">
     <input type="hidden" name="id" th:if="${author != null}" th:value="${author.id}">
-    <input type="text" name="name" placeholder="Please input name" th:value="${author.name}"><br>
-    <input type="text" name="surname" placeholder="Please input surname" th:value="${author.surname}"><br>
-    <input type="email" name="email" placeholder="Please input email" th:value="${author.email}" ><br>
-    <select name="gender"  th:value="${author.gender}">
+    <input type="text" name="name" th:value="${author.name}"><br>
+    <input type="text" name="surname" th:value="${author.surname}"><br>
+    <input type="email" name="email" th:value="${author.email}"><br>
+    <select name="gender" th:value="${author.gender}">
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
     </select><br>
-    <textarea name="bio" placeholder="PLease input bio" th:text="${author.bio}"></textarea><br>
+    <textarea name="bio" th:text="${author.bio}"></textarea><br>
+   <input type="file" name="image" th:value="${author.imageUrl}">
     <input type="submit" value="Edit author"/>
 </form>
 </body>

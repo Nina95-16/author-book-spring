@@ -25,4 +25,6 @@ public class Author {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String bio;
+    private String imageUrl;
 }
+

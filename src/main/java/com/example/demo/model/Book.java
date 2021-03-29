@@ -16,12 +16,9 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
     private String title;
     private String description;
-    @NotNull
     private double price;
-    @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Author author;
 }

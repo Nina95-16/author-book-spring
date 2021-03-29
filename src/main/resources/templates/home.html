@@ -5,8 +5,46 @@
     <title>Title</title>
 </head>
 <body>
+<a href="/logout" th:if="${username!=null}">Logout</a><br>
+<a href="/login" th:if="${username==null}">Login</a><br>
+<h3 th:text="Welcome + ' ' + ${username}" th:if="${username !=null}"></h3>
+Search:
+<form action="/search" method="get">
+    <input type="text" name="keyword">
+    <input type="submit" value="search">
+</form>
+<table>
+    <tbody>
+    <tr th:each="author: ${authors}">
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.name}"></td>
+        <td th:text="${author.surname}"></td>
+        <td th:text="${author.email}"></td>
+        <td th:text="${author.gender.name()}"></td>
+        <td th:text="${author.bio}"></td>
+        <td>
+            <a th:href="@{/author/save/(id=${author.id})}">Edit</a> | <a th:href="@{/author/delete/(id=${author.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <tbody>
+    <tr th:each="book: ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.description}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.author.name}"></td>
+        <td>
+            <a th:href="@{/book/save/(id=${book.id})}">Edit</a> | <a
+                th:href="@{/book/delete/(id=${book.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 ADD AUTHOR:
-<form action="/author/save" method="post">
+<form action="/author/save" method="post" enctype="multipart/form-data">
     <input type="text" name="name" placeholder="Please input name"><br>
     <input type="text" name="surname" placeholder="Please input surname"><br>
     <input type="email" name="email" placeholder="Please input email"><br>
@@ -15,6 +53,7 @@ ADD AUTHOR:
         <option value="FEMALE">FEMALE</option>
     </select><br>
     <textarea name="bio" placeholder="PLease input bio"></textarea><br>
+   <input type="file" name="image"><br>
     <input type="submit" value="Add author"/>
 </form>
 <br>
@@ -24,7 +63,8 @@ ADD BOOK:
     <textarea name="description" placeholder="Please input description"></textarea><br><br>
     <input type="number" name="price" placeholder="Please input price"><br>
     <select name="author.id">
-        <option th:each="author:${authors}" th:value="author.id" th:text="${author.name}"></option>
+        <option th:each="author:${authors}" th:value="${author.id}" th:text="${author.name}"
+                th:selected="${book.author.id== author.id}"></option>
     </select><br>
     <input type="submit" value="Add book"/>
 </form>
